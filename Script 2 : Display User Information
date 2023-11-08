@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>User Information</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Database connection
+                $pdo = new PDO('mysql:host=localhost;dbname=your_database_name', 'your_username', 'your_password');
+
+                // Fetch user data from the database
+                $stmt = $pdo->query('SELECT * FROM users');
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($row['name']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['email']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['gender']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['city']) . '</td>';
+                    echo '</tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
